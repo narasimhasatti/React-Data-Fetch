@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 import './App.css';
-
+import DisplayComp from './DisplayComp';
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            datas: []
+            filmData: []
         };
         this.loadData = this.loadData.bind(this);
 
@@ -18,7 +18,7 @@ class App extends Component {
                 return response.json();
             }).then(json => {
                 this.setState({
-                    datas: json.films.film
+                    filmData: json.films.film
                 });
             }).catch(err => {
                 console.log(err)
@@ -31,38 +31,7 @@ class App extends Component {
 
         return (
 
-            <
-            div className = "App" >
-            <
-            div className = "container" >
-            <
-            div className = "panel-group" >
-
-
-            {
-                this.state.datas.map((datas, dataid) => {
-                    return ( <
-                        div class = "grid-container outline" >
-                        <
-                        div class = "row" >
-                        <
-                        div className = "col-3 col-1"
-                        key = { dataid } >
-                        Film ID: { datas.id } <
-                        /div> <
-                        div className = "col-3 col-1"
-                        key = { dataid } >
-                        Film Title: { datas.title } <
-                        /div> <
-                        /div> <
-                        /div>
-                    )
-                })
-            }
-
-            <
-            /div> </div > < /div>
-
+            <DisplayComp fetchFilmDetails={this.state.filmData}/>
         );
     }
 
